@@ -42,6 +42,14 @@ public class FXMLDocumentController implements Initializable {
     private TextField lucInput;
     @FXML
     private TextField Name;
+    @FXML
+    private TableColumn perkName;
+    @FXML
+    private TableColumn perkDesc;
+    @FXML
+    private TableColumn itemName;
+    @FXML
+    private TableColumn Quanity;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -53,6 +61,14 @@ public class FXMLDocumentController implements Initializable {
     private void SaveCreate(ActionEvent event) {
        // System.out.println("You clicked me!");
        // label.setText("Hello World!");
+       
+       //int str = strInput.getText();
+        perInput.getText();
+         endInput.getText();
+        chaInput.getText();
+         agiInput.getText();
+         intInput.getText();
+        lucInput.getText();
        
     }
     
@@ -89,13 +105,13 @@ public class FXMLDocumentController implements Initializable {
     private void randomChar(ActionEvent event) {
         //System.out.println("You clicked me!");
        // double x = Math.random()*10;
-        strInput.setText(Double.toString(Math.ceil(Math.random()*10)));
-        perInput.setText(Double.toString(Math.ceil(Math.random()*10)));
-         endInput.setText(Double.toString(Math.ceil(Math.random()*10)));
-        chaInput.setText(Double.toString(Math.ceil(Math.random()*10)));
-         agiInput.setText(Double.toString(Math.ceil(Math.random()*10)));  
-         intInput.setText(Double.toString(Math.ceil(Math.random()*10)));
-        lucInput.setText(Double.toString(Math.ceil(Math.random()*10)));
+        strInput.setText(Integer.toString((int) Math.ceil(Math.random()*10)));
+        perInput.setText(Integer.toString((int) Math.ceil(Math.random()*10)));
+         endInput.setText(Integer.toString((int)Math.ceil(Math.random()*10)));
+        chaInput.setText(Integer.toString((int)Math.ceil(Math.random()*10)));
+         agiInput.setText(Integer.toString((int)Math.ceil(Math.random()*10)));  
+         intInput.setText(Integer.toString((int)Math.ceil(Math.random()*10)));
+        lucInput.setText(Integer.toString((int)Math.ceil(Math.random()*10)));
 
     }
 

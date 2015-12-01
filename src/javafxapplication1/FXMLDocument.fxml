@@ -92,6 +92,25 @@
                   </AnchorPane>
             </content>
           </Tab>
+            <Tab text="Perks">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="390.0" fitWidth="559.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../inv.jpg" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="perkTable" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
+                           <columns>
+                              <TableColumn fx:id="perkName" prefWidth="75.0" text="Perk Name" />
+                              <TableColumn fx:id="perkDesc" prefWidth="228.0" text="Desc" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
     </children>
