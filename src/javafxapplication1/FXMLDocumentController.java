@@ -59,16 +59,38 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void SaveCreate(ActionEvent event) {
+       //called when the Create/ Save button is pushed
+        
+        try{
+            createConnection();
+            Statement st = conn.createStatement();
+            st.setQueryTimeout(30);  // set timeout to 30 sec.
+            String createString;
+       
+            createString = "INSERT INTO Character VALUES(null,\"" + Name.getText() + "\",1,0,0);";
+            st.executeUpdate(createString);
+       
+            ResultSet rs;
+            st.setQueryTimeout(30);  // set timeout to 30 sec.
+            rs = st.executeQuery("Select charID from Character where cName = '" + Name.getText()+"';");
+            st = conn.createStatement();
+            String cha = rs.getString("charID");
+       
+            createString = "INSERT INTO SPECIAL VALUES(" + strInput.getText() + "," +
+               perInput.getText() + "," + endInput.getText() + "," + chaInput.getText()
+               + "," + intInput.getText() + "," +agiInput.getText() + "," + lucInput.getText()
+               + "," + cha + ");";
+            st.executeUpdate(createString);
+            
+            System.out.println("ti's done");
+       
+       }
+       catch(Exception e){
+           e.printStackTrace();
+           label.setText("Error");
+       }
        // System.out.println("You clicked me!");
        // label.setText("Hello World!");
-       
-       //int str = strInput.getText();
-        perInput.getText();
-         endInput.getText();
-        chaInput.getText();
-         agiInput.getText();
-         intInput.getText();
-        lucInput.getText();
        
     }
     
