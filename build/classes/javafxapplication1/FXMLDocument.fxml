@@ -101,10 +101,10 @@
                               <Image url="@../../inv.jpg" />
                            </image>
                         </ImageView>
-                        <TableView layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
+                        <TableView fx:id="perkTable" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
                            <columns>
-                              <TableColumn fx:id="itemName1" prefWidth="75.0" text="Item Name" />
-                              <TableColumn fx:id="Quanity1" prefWidth="75.0" text="Quanity" />
+                              <TableColumn fx:id="perkName" prefWidth="75.0" text="Perk Name" />
+                              <TableColumn fx:id="perkDesc" prefWidth="228.0" text="Desc" />
                            </columns>
                         </TableView>
                      </children>
