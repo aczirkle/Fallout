@@ -12,6 +12,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  *
  * @author Andrew
@@ -49,16 +55,27 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void load(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+        //System.out.println("You clicked me!");
+       // label.setText("Hello World!");
+       try{
+       createConnection();
+       Statement st = conn.createStatement();
+      st.setQueryTimeout(30);  // set timeout to 30 sec.
+       String cha="1";
+               
+      st.execute("Select * from special where charID = '"+cha+"'");
+       }
+       catch(Exception e){
+           e.printStackTrace();
+       }
     }
     
     @FXML
     private void randomChar(ActionEvent event) {
         //System.out.println("You clicked me!");
-        int x = (int) Math.random()*10;
+        double x = Math.random()*10;
         strInput.setText("10");
-        perInput.setText(""+x);
+        perInput.setText(Double.toString(Math.floor(x)));
          endInput.setText("");
         chaInput.setText("");
          agiInput.setText("");      
@@ -67,10 +84,22 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-    
+    Connection conn = null;
+    void createConnection(){
+        try
+    {
+      // create a database connection
+      conn = DriverManager.getConnection("jdbc:sqlite:Fallout.db");
+      Statement st = conn.createStatement();
+      st.setQueryTimeout(30);  // set timeout to 30 sec.
+    }
+        catch(Exception e){
+            e.printStackTrace();
+            
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
 }
