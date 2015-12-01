@@ -21,10 +21,10 @@
                               <Image url="@../../Fall.jpg" />
                            </image>
                         </ImageView>
-                          <Button fx:id="button" layoutX="177.0" layoutY="40.0" onAction="#handleButtonAction" text="Load" />
+                          <Button fx:id="button" layoutX="177.0" layoutY="40.0" onAction="#load" text="Load" />
                           <Label fx:id="label" layoutX="245.0" layoutY="194.0" minHeight="16" minWidth="69" />
                         <Label layoutX="23.0" layoutY="22.0" prefHeight="17.0" prefWidth="181.0" text="Character name" />
-                        <TextField layoutX="14.0" layoutY="39.0" />
+                        <TextField fx:id="Name" layoutX="14.0" layoutY="39.0" />
                         <TextField fx:id="strInput" layoutX="71.0" layoutY="91.0" prefHeight="25.0" prefWidth="36.0" />
                         <Button fx:id="button1" layoutX="234.0" layoutY="333.0" onAction="#SaveCreate" text="Create/Save" />
                         <Button fx:id="button2" layoutX="68.0" layoutY="333.0" onAction="#randomChar" text="Random" />

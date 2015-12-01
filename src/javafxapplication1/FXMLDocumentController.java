@@ -40,6 +40,8 @@ public class FXMLDocumentController implements Initializable {
     private TextField intInput;
     @FXML
     private TextField lucInput;
+    @FXML
+    private TextField Name;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -49,8 +51,9 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void SaveCreate(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+       // System.out.println("You clicked me!");
+       // label.setText("Hello World!");
+       
     }
     
     @FXML
@@ -62,8 +65,12 @@ public class FXMLDocumentController implements Initializable {
        Statement st = conn.createStatement();
       st.setQueryTimeout(30);  // set timeout to 30 sec.
        String cha="1";
-               
-      st.execute("Select * from special where charID = '"+cha+"'");
+       ResultSet rs;
+      rs = st.executeQuery("Select * from special where charID = '"+cha+"'");
+      System.out.println("Str = " + rs.getInt("strength"));
+       System.out.println("End = " + rs.getInt("endurance"));
+       intInput.setText(Integer.toString(rs.getInt("endurance")));
+     //   System.out.println("Name = " + rs.getString("name"));
        }
        catch(Exception e){
            e.printStackTrace();
@@ -73,14 +80,14 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void randomChar(ActionEvent event) {
         //System.out.println("You clicked me!");
-        double x = Math.random()*10;
-        strInput.setText("10");
-        perInput.setText(Double.toString(Math.floor(x)));
-         endInput.setText("");
-        chaInput.setText("");
-         agiInput.setText("");      
-         intInput.setText("");
-        lucInput.setText("");
+       // double x = Math.random()*10;
+        strInput.setText(Double.toString(Math.ceil(Math.random()*10)));
+        perInput.setText(Double.toString(Math.ceil(Math.random()*10)));
+         endInput.setText(Double.toString(Math.ceil(Math.random()*10)));
+        chaInput.setText(Double.toString(Math.ceil(Math.random()*10)));
+         agiInput.setText(Double.toString(Math.ceil(Math.random()*10)));  
+         intInput.setText(Double.toString(Math.ceil(Math.random()*10)));
+        lucInput.setText(Double.toString(Math.ceil(Math.random()*10)));
 
     }
 
