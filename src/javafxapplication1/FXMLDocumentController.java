@@ -63,17 +63,25 @@ public class FXMLDocumentController implements Initializable {
        try{
        createConnection();
        Statement st = conn.createStatement();
-      st.setQueryTimeout(30);  // set timeout to 30 sec.
-       String cha="1";
        ResultSet rs;
+      st.setQueryTimeout(30);  // set timeout to 30 sec.
+      rs = st.executeQuery("Select charID from Character where cName = '"+Name.getText()+"'");
+      st = conn.createStatement();
+       String cha=rs.getString("charID");
+       
       rs = st.executeQuery("Select * from special where charID = '"+cha+"'");
-      System.out.println("Str = " + rs.getInt("strength"));
-       System.out.println("End = " + rs.getInt("endurance"));
-       intInput.setText(Integer.toString(rs.getInt("endurance")));
+      strInput.setText(Integer.toString(rs.getInt("strength")));
+        perInput.setText(Integer.toString(rs.getInt("perception")));
+         endInput.setText(Integer.toString(rs.getInt("endurance")));
+        chaInput.setText(Integer.toString(rs.getInt("charisma")));
+         agiInput.setText(Integer.toString(rs.getInt("agility")));  
+         intInput.setText(Integer.toString(rs.getInt("intelligence")));
+        lucInput.setText(Integer.toString(rs.getInt("luck")));
      //   System.out.println("Name = " + rs.getString("name"));
        }
        catch(Exception e){
            e.printStackTrace();
+           label.setText("Error");
        }
     }
     
