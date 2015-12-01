@@ -50,6 +50,14 @@ public class FXMLDocumentController implements Initializable {
     private TableColumn itemName;
     @FXML
     private TableColumn Quanity;
+	@FXML
+    private TableColumn skillName;
+    @FXML
+    private TableColumn skillDesc;
+	
+	private TableColumn itemNameFull;
+    @FXML
+    private TableColumn itemDescFull;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
