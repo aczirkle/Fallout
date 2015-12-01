@@ -24,6 +24,7 @@ public class JavaFXApplication1 extends Application {
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        //stage.setTitle("Fallout Character Maker");
         stage.show();
     }
 

@@ -1,28 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="399.0" prefWidth="559.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="javafxapplication1.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="399.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication1.FXMLDocumentController">
     <children>
       <TabPane layoutX="3.0" prefHeight="416.0" prefWidth="559.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Untitled Tab 1">
+          <Tab text="Character">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                          <Button fx:id="button" layoutX="247.0" layoutY="140.0" onAction="#handleButtonAction" text="Click Me!" />
+                        <ImageView fitHeight="397.0" fitWidth="562.0" layoutX="-1.0" layoutY="-5.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../Fall.jpg" />
+                           </image>
+                        </ImageView>
+                          <Button fx:id="button" layoutX="177.0" layoutY="40.0" onAction="#handleButtonAction" text="Load" />
                           <Label fx:id="label" layoutX="245.0" layoutY="194.0" minHeight="16" minWidth="69" />
+                        <Label layoutX="23.0" layoutY="22.0" prefHeight="17.0" prefWidth="181.0" text="Character name" />
+                        <TextField layoutX="14.0" layoutY="39.0" />
+                        <TextField fx:id="strInput" layoutX="71.0" layoutY="91.0" prefHeight="25.0" prefWidth="36.0" />
+                        <Button fx:id="button1" layoutX="234.0" layoutY="333.0" onAction="#SaveCreate" text="Create/Save" />
+                        <Button fx:id="button2" layoutX="68.0" layoutY="333.0" onAction="#randomChar" text="Random" />
+                        <TextField fx:id="perInput" layoutX="71.0" layoutY="138.0" prefHeight="25.0" prefWidth="36.0" />
+                        <TextField fx:id="chaInput" layoutX="177.0" layoutY="90.0" prefHeight="25.0" prefWidth="36.0" />
+                        <TextField fx:id="intInput" layoutX="177.0" layoutY="138.0" prefHeight="25.0" prefWidth="36.0" />
+                        <TextField fx:id="agiInput" layoutX="177.0" layoutY="188.0" prefHeight="25.0" prefWidth="36.0" />
+                        <TextField fx:id="lucInput" layoutX="177.0" layoutY="243.0" prefHeight="25.0" prefWidth="36.0" />
+                        <TextField fx:id="endInput" layoutX="71.0" layoutY="190.0" prefHeight="25.0" prefWidth="36.0" />
+                        <Label layoutX="14.0" layoutY="89.0" prefHeight="28.0" prefWidth="51.0" text="Str" textFill="#3feb48">
+                           <font>
+                              <Font name="Copperplate Gothic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="137.0" prefHeight="28.0" prefWidth="51.0" text="Per" textFill="#3feb48">
+                           <font>
+                              <Font name="Copperplate Gothic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="187.0" prefHeight="28.0" prefWidth="56.0" text="End" textFill="#3feb48">
+                           <font>
+                              <Font name="Copperplate Gothic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="114.0" layoutY="89.0" prefHeight="28.0" prefWidth="59.0" text="Cha" textFill="#3feb48">
+                           <font>
+                              <Font name="Copperplate Gothic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="118.0" layoutY="137.0" prefHeight="28.0" prefWidth="59.0" text="Int" textFill="#3feb48">
+                           <font>
+                              <Font name="Copperplate Gothic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="118.0" layoutY="189.0" prefHeight="28.0" prefWidth="59.0" text="agi" textFill="#3feb48">
+                           <font>
+                              <Font name="Copperplate Gothic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="114.0" layoutY="242.0" prefHeight="28.0" prefWidth="59.0" text="Luc" textFill="#3feb48">
+                           <font>
+                              <Font name="Copperplate Gothic Bold" size="24.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Untitled Tab 2">
+          <Tab text="Inventory">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="390.0" fitWidth="559.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../inv.jpg" />
+                           </image>
+                        </ImageView>
+                        <TableView layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
+                          <columns>
+                            <TableColumn fx:id="itemName" prefWidth="75.0" text="Item Name" />
+                            <TableColumn fx:id="Quanity" prefWidth="75.0" text="Quanity" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
             </content>
           </Tab>
         </tabs>
