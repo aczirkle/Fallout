@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.text.*?>
+<?import javafx.collections.*?> 
+<?import javafx.geometry.Insets?>
+<?import javafxapplication1.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?> 
 <?import javafx.scene.layout.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="399.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication1.FXMLDocumentController">
@@ -29,7 +33,7 @@
                         <Label layoutX="23.0" layoutY="22.0" prefHeight="17.0" prefWidth="181.0" text="Character name" />
                         <TextField fx:id="Name" layoutX="14.0" layoutY="39.0" />
                         <TextField fx:id="strInput" layoutX="71.0" layoutY="91.0" prefHeight="25.0" prefWidth="36.0" />
-                        <Button fx:id="CreateSave" layoutX="234.0" layoutY="333.0" onAction="#Create" text="Create" />
+                        <Button fx:id="Create" layoutX="234.0" layoutY="333.0" onAction="#Create" text="Create" />
                         <Button fx:id="button2" layoutX="68.0" layoutY="333.0" onAction="#randomChar" text="Random" />
                         <TextField fx:id="perInput" layoutX="71.0" layoutY="138.0" prefHeight="25.0" prefWidth="36.0" />
                         <TextField fx:id="chaInput" layoutX="177.0" layoutY="90.0" prefHeight="25.0" prefWidth="36.0" />
@@ -92,11 +96,24 @@
                               <Image url="@../../inv.jpg" />
                            </image>
                         </ImageView>
-                        <TableView layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
+                        <TableView fx:id="itemView" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
                           <columns>
-                            <TableColumn fx:id="itemName" prefWidth="75.0" text="Item Name" />
-                            <TableColumn fx:id="Quanity" prefWidth="75.0" text="Quanity" />
+                            <TableColumn  prefWidth="75.0" text="Item Name" >
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="name" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn prefWidth="75.0" text="Quanity" >
+                             <cellValueFactory>
+                                    <PropertyValueFactory property="desc" />
+                             </cellValueFactory>
+                           </TableColumn>
                           </columns>
+                          <items>
+                                <FXCollections fx:factory="observableArrayList" fx:id="itemArray">
+                                  
+                                </FXCollections>
+                            </items>
                         </TableView>
                      </children>
                   </AnchorPane>
@@ -111,11 +128,24 @@
                               <Image url="@../../inv.jpg" />
                            </image>
                         </ImageView>
-                        <TableView fx:id="perkTable" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
+                        <TableView fx:id="perkView" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
                            <columns>
-                              <TableColumn fx:id="perkName" prefWidth="75.0" text="Perk Name" />
-                              <TableColumn fx:id="perkDesc" prefWidth="228.0" text="Desc" />
+                              <TableColumn fx:id="perkName" prefWidth="75.0" text="Perk Name" >
+                              <cellValueFactory>
+                                    <PropertyValueFactory property="name" />
+                              </cellValueFactory>
+                              </TableColumn>
+                              <TableColumn fx:id="perkDesc" prefWidth="228.0" text="Desc" >
+                                  <cellValueFactory>
+                                    <PropertyValueFactory property="desc" />
+                                  </cellValueFactory>
+                              </TableColumn>
                            </columns>
+                           <items>
+                               <FXCollections fx:factory="observableArrayList" fx:id="perkArray">
+                                  
+                                </FXCollections>
+                           </items>
                         </TableView>
                      </children>
                   </AnchorPane>
@@ -130,11 +160,24 @@
                               <Image url="@../../inv.jpg" />
                            </image>
                         </ImageView>
-                        <TableView fx:id="perkTable1" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
+                        <TableView fx:id="skillView" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
                            <columns>
-                              <TableColumn fx:id="skillName" prefWidth="75.0" text="Skill Name" />
-                              <TableColumn fx:id="skillDesc" prefWidth="228.0" text="Desc" />
+                              <TableColumn fx:id="skillName" prefWidth="75.0" text="Skill Name" >
+                                  <cellValueFactory>
+                                    <PropertyValueFactory property="name" />
+                                  </cellValueFactory>
+                              </TableColumn>
+                              <TableColumn fx:id="skillDesc" prefWidth="228.0" text="Desc" >
+                                  <cellValueFactory>
+                                    <PropertyValueFactory property="desc" />
+                                  </cellValueFactory>
+                              </TableColumn>
                            </columns>
+                           <items>
+                               <FXCollections fx:factory="observableArrayList" fx:id="skillArray">
+                                  
+                                </FXCollections>
+                           </items>
                         </TableView>
                      </children>
                   </AnchorPane>
@@ -149,11 +192,24 @@
                               <Image url="@../../inv.jpg" />
                            </image>
                         </ImageView>
-                        <TableView fx:id="perkTable11" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
+                        <TableView fx:id="fullItemView" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
                            <columns>
-                              <TableColumn fx:id="skillName1" prefWidth="75.0" text="Item" />
-                              <TableColumn fx:id="skillDesc1" prefWidth="228.0" text="Desc" />
+                              <TableColumn fx:id="fullItemName" prefWidth="75.0" text="Item" >
+                                  <cellValueFactory>
+                                    <PropertyValueFactory property="name" />
+                                  </cellValueFactory>
+                              </TableColumn>
+                              <TableColumn fx:id="fullItemDesc" prefWidth="228.0" text="Desc" >
+                                  <cellValueFactory>
+                                    <PropertyValueFactory property="desc" />
+                                  </cellValueFactory>
+                              </TableColumn>
                            </columns>
+                           <items>
+                               <FXCollections fx:factory="observableArrayList" fx:id="fullItemArray">
+                                  
+                                </FXCollections>
+                           </items>
                         </TableView>
                      </children>
                   </AnchorPane>

@@ -12,6 +12,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -43,22 +49,19 @@ public class FXMLDocumentController implements Initializable {
     private TextField lucInput;
     @FXML
     private TextField Name;
-    @FXML
-    private TableColumn perkName;
-    @FXML
-    private TableColumn perkDesc;
-    @FXML
-    private TableColumn itemName;
-    @FXML
-    private TableColumn Quanity;
-	@FXML
-    private TableColumn skillName;
-    @FXML
-    private TableColumn skillDesc;
+ //   @FXML private TableColumn perkName;
+   // @FXML private TableColumn perkDesc;
+ //   @FXML private TableColumn itemName;
+  //  @FXML private TableColumn Quanity;
+    @FXML private TableView itemView;
+    @FXML private TableView perkView;
+    @FXML private TableView skillView;
+    @FXML private TableView fullItemView;
+ //   @FXML private TableColumn skillName;
+ //   @FXML private TableColumn skillDesc;
 	
-	private TableColumn itemNameFull;
-    @FXML
-    private TableColumn itemDescFull;
+ //   @FXML private TableColumn itemNameFull;
+  //  @FXML private TableColumn itemDescFull;
     
     //TODO: Add in some comments and tell us what these are in the GUI please
     /*Other thongs to do for the rest of us to do what we need to do:
@@ -165,7 +168,10 @@ public class FXMLDocumentController implements Initializable {
             perkDescs.add(rs.getString(2));
         }
         
-        displayCharPerks(perkNames, perkDescs);
+       // displayCharPerks(perkNames, perkDescs);
+       for(int i=0;i<perkNames.size();i++){
+            addPerk(perkNames.get(i),perkDescs.get(i));  
+        }
         
         //getting the requested character's inventory
         ArrayList<String> itemNames = new ArrayList<String>();
@@ -179,13 +185,17 @@ public class FXMLDocumentController implements Initializable {
             itemNames.add(rs.getString(2));
             itemQuants.add(rs.getString(3));
         }
+        
+        for(int i=0;i<itemNames.size();i++){
+            addItem(itemNames.get(i),itemQuants.get(i));  
+        }
         /*now that we have the items a character has, it is time to figure out
          *we are going to find out what kinf of item each item is */
         /*TODO: to do this I am going to make three methods that check to see
          *the iID of each returned item then adds them to an ArrayList that is
          *returned. The returned ArrayList will then only consist of items of whatever
          *type that was being tested.*/
-        
+        loadSkills(cha);
        }
        catch(Exception e){
            e.printStackTrace();
@@ -207,6 +217,71 @@ public class FXMLDocumentController implements Initializable {
         lucInput.setText(Integer.toString((int)Math.ceil(Math.random()*10)));
 
     }
+    
+     protected void addItem(String name,String desc) {
+        ObservableList<Item> data = itemView.getItems();
+        data.add(new Item(name, desc));
+    }
+     
+     protected void addPerk(String name,String desc) {
+        ObservableList<Item> data = perkView.getItems();
+        data.add(new Item(name, desc));
+    }
+     
+     protected void addSkill(String name,String desc) {
+        ObservableList<Item> data = skillView.getItems();
+        data.add(new Item(name, desc));
+    }
+     
+     protected void loadItems(){
+         createConnection();
+         try{
+         Statement st = conn.createStatement();
+        ResultSet rs;
+        st.setQueryTimeout(30);  // set timeout to 30 sec.
+        rs = st.executeQuery("Select iID,iName from Items");
+        while(rs.next()){
+            ObservableList<Item> data = fullItemView.getItems();
+            data.add(new Item(rs.getString(1), rs.getString(2)));
+         }   
+         }
+         catch(Exception e){
+             e.printStackTrace();
+         }
+     }
+      
+     
+     
+     protected void loadSkills(String charID){
+         ArrayList<String> skillNames = new ArrayList<String>();
+         skillNames.add("Lockpicking");
+         skillNames.add("Hacking");
+         skillNames.add("Sneak");
+         skillNames.add("Speech");
+         skillNames.add("Science");
+         createConnection();
+         try{
+         Statement st = conn.createStatement();
+        ResultSet rs;
+        st.setQueryTimeout(30);  // set timeout to 30 sec.
+        
+        //Lockpicking int NOT NULL, Hacking int NOT NULL, Sneak int NOT NULL, Speech int NOT NULL, Science int NOT NULL, charID INTEGER NOT NULL PRIMARY KEY references Character(charID) ON DELETE CASCADE);
+
+        rs = st.executeQuery("Select * from Skills where charID = '"+charID+"'");
+      /*  while(rs.next()){
+            ObservableList<Skill> data = fullItemView.getItems();
+            data.add(new Skill(rs.getString(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)));
+         }   */
+      
+         for(int i=0;i<skillNames.size();i++){
+           ObservableList<Item> data = skillView.getItems();
+              data.add(new Item(skillNames.get(i),rs.getString(i+1)));
+         }
+         }
+         catch(Exception e){
+             e.printStackTrace();
+         }
+     }
 
     Connection conn = null;
     void createConnection(){

@@ -22,7 +22,7 @@ public class JavaFXApplication1 extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
-        
+        //stage.
         stage.setScene(scene);
         stage.setTitle("Fallout Character Maker");
         stage.show();
