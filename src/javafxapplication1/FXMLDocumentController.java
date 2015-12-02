@@ -76,9 +76,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     @FXML
-    private void SaveCreate(ActionEvent event) {
-       //called when the Create/ Save button is pushed
-        
+    private void Create(ActionEvent event) {
         try{
             createConnection();
             Statement st = conn.createStatement();
@@ -118,6 +116,15 @@ public class FXMLDocumentController implements Initializable {
        // System.out.println("You clicked me!");
        // label.setText("Hello World!");
        
+    }
+    
+    
+    @FXML
+    private void Save(ActionEvent event) {
+        //called when the Save button is pushed
+        //still called SaveCreate for convenience
+        //TODO: implement the stuff that happens when the 
+        
     }
     
     @FXML
