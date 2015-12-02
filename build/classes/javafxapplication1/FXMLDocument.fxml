@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="399.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication1.FXMLDocumentController">
     <children>
-      <TabPane layoutX="3.0" prefHeight="416.0" prefWidth="559.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="416.0" prefWidth="561.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Character">
             <content>
@@ -22,11 +22,14 @@
                            </image>
                         </ImageView>
                           <Button fx:id="button" layoutX="177.0" layoutY="40.0" onAction="#load" text="Load" />
-                          <Label fx:id="label" layoutX="245.0" layoutY="194.0" minHeight="16" minWidth="69" />
+                          <Label fx:id="label" layoutX="245.0" layoutY="194.0" minHeight="16" minWidth="69" textFill="#3cee5c">
+                           <font>
+                              <Font name="Copperplate Gothic Bold" size="24.0" />
+                           </font></Label>
                         <Label layoutX="23.0" layoutY="22.0" prefHeight="17.0" prefWidth="181.0" text="Character name" />
                         <TextField fx:id="Name" layoutX="14.0" layoutY="39.0" />
                         <TextField fx:id="strInput" layoutX="71.0" layoutY="91.0" prefHeight="25.0" prefWidth="36.0" />
-                        <Button fx:id="button1" layoutX="234.0" layoutY="333.0" onAction="#SaveCreate" text="Create/Save" />
+                        <Button fx:id="Create" layoutX="234.0" layoutY="333.0" onAction="#Create" text="Create" />
                         <Button fx:id="button2" layoutX="68.0" layoutY="333.0" onAction="#randomChar" text="Random" />
                         <TextField fx:id="perInput" layoutX="71.0" layoutY="138.0" prefHeight="25.0" prefWidth="36.0" />
                         <TextField fx:id="chaInput" layoutX="177.0" layoutY="90.0" prefHeight="25.0" prefWidth="36.0" />
@@ -69,6 +72,13 @@
                               <Font name="Copperplate Gothic Bold" size="24.0" />
                            </font>
                         </Label>
+                        <TextField fx:id="lvlInput" layoutX="71.0" layoutY="244.0" prefHeight="25.0" prefWidth="36.0" />
+                        <Label layoutX="14.0" layoutY="242.0" prefHeight="28.0" prefWidth="56.0" text="Lvl" textFill="#3feb48">
+                           <font>
+                              <Font name="Copperplate Gothic Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="Save" layoutX="385.0" layoutY="333.0" onAction="#Save" text="Save" />
                      </children>
                   </AnchorPane>
             </content>
@@ -105,6 +115,44 @@
                            <columns>
                               <TableColumn fx:id="perkName" prefWidth="75.0" text="Perk Name" />
                               <TableColumn fx:id="perkDesc" prefWidth="228.0" text="Desc" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Skills">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="390.0" fitWidth="559.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../inv.jpg" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="perkTable1" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
+                           <columns>
+                              <TableColumn fx:id="skillName" prefWidth="75.0" text="Skill Name" />
+                              <TableColumn fx:id="skillDesc" prefWidth="228.0" text="Desc" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Item List">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="390.0" fitWidth="559.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../inv.jpg" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="perkTable11" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
+                           <columns>
+                              <TableColumn fx:id="skillName1" prefWidth="75.0" text="Item" />
+                              <TableColumn fx:id="skillDesc1" prefWidth="228.0" text="Desc" />
                            </columns>
                         </TableView>
                      </children>
