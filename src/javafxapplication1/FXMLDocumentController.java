@@ -55,6 +55,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML private TableView perkView;
     @FXML private TableView skillView;
     @FXML private TableView fullItemView;
+    @FXML private TableView fullPerkView;
+    @FXML private TableView fullSkillView;
+    
 
     
     //TODO: Add in some comments and tell us what these are in the GUI please
@@ -75,7 +78,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void Create(ActionEvent event) {
         try{
-            createConnection();
+           // createConnection();
             Statement st = conn.createStatement();
             st.setQueryTimeout(30);  // set timeout to 30 sec.
             String createString;
@@ -135,7 +138,7 @@ public class FXMLDocumentController implements Initializable {
         //System.out.println("You clicked me!");
        // label.setText("Hello World!");
     try{
-        createConnection();
+        //createConnection();
         Statement st = conn.createStatement();
         ResultSet rs;
         st.setQueryTimeout(30);  // set timeout to 30 sec.
@@ -234,7 +237,7 @@ public class FXMLDocumentController implements Initializable {
     }
      
      protected void loadItems(){
-         createConnection();
+         //createConnection();
          try{
          Statement st = conn.createStatement();
         ResultSet rs;
@@ -264,7 +267,7 @@ public class FXMLDocumentController implements Initializable {
          if(Name.getText().equals(""))
              throw new RuntimeException("No charatcter loaded");
              
-         createConnection();
+         //createConnection();
          try{
              Item it = (Item) fullItemView.getSelectionModel().getSelectedItem();
              String name = (it.getName());
@@ -303,6 +306,96 @@ public class FXMLDocumentController implements Initializable {
          
          
      }
+     @FXML
+     protected void addPerkFromFull(ActionEvent event){
+         if(Name.getText().equals(""))
+             throw new RuntimeException("No charatcter loaded");
+             
+         //createConnection();
+         try{
+             Item it = (Item) fullPerkView.getSelectionModel().getSelectedItem();
+             String perkName = it.getName();
+             if(perkName .equals(""))
+                 throw new RuntimeException("No Item Selected");
+             
+         Statement st = conn.createStatement();
+         ResultSet rs;
+         st.setQueryTimeout(30);  // set timeout to 30 sec.
+         
+        // rs = st.executeQuery("Select perkName from Perks where iName = '"+perkName+"'");
+         //st = conn.createStatement();
+         //if(!rs.next())
+           //  throw new RuntimeException("No perk selected ");
+         //String pk = rs.getString(1);
+        
+         rs = st.executeQuery("Select charID from Character where cName = '"+Name.getText()+"'");
+         st = conn.createStatement();
+         String cha = rs.getString(1);
+         if(cha.equals(""))
+             throw new RuntimeException("No character by that name");
+          System.out.println("I got the data: "+perkName+" ,"+cha);
+       String str = "INSERT INTO HasPerks VALUES(?, ?)";
+        PreparedStatement get = conn.prepareStatement(str);
+        get.setString(2,cha);
+        get.setString(1,perkName);
+        get.executeUpdate();
+        System.out.println("I Updated the db");
+        load(event);
+        System.out.println("I did Everything");
+
+         }
+         catch (Exception e){
+             e.printStackTrace();
+             
+         }
+         
+         
+     }
+     @FXML
+     protected void addSkillFromFull(ActionEvent event){
+         if(Name.getText().equals(""))
+             throw new RuntimeException("No charatcter loaded");
+             
+        // createConnection();
+         try{
+             Item it = (Item) fullSkillView.getSelectionModel().getSelectedItem();
+             String name = (it.getName());
+             if(name.equals(""))
+                 throw new RuntimeException("No Item Selected");
+             
+         Statement st = conn.createStatement();
+         ResultSet rs;
+         st.setQueryTimeout(30);  // set timeout to 30 sec.
+         
+         rs = st.executeQuery("Select charID from Character where cName = '"+Name.getText()+"'");
+         st = conn.createStatement();
+         String cha = rs.getString(1);
+         if(cha.equals(""))
+             throw new RuntimeException("No character by that name");
+        
+         rs = st.executeQuery("Select "+name+" from Skills where charID = '"+cha+"'");
+         int skill = rs.getInt(1);
+         skill++;
+
+       String str = "UPDATE Skills SET "+name+" = ? where charID = ?";
+        PreparedStatement get = conn.prepareStatement(str);
+        get.setInt(1,skill);
+        get.setInt(2,Integer.parseInt(cha));
+        get.executeUpdate();
+        
+        System.out.println("I Updated the db");
+        load(event);
+        System.out.println("I did Everything");
+
+         }
+         catch (Exception e){
+             e.printStackTrace();
+             
+         }
+         
+         
+     }
+     
      
      protected void loadSkills(String charID){
          ArrayList<String> skillNames = new ArrayList<String>();
@@ -311,7 +404,7 @@ public class FXMLDocumentController implements Initializable {
          skillNames.add("Sneak");
          skillNames.add("Speech");
          skillNames.add("Science");
-         createConnection();
+         //createConnection();
          try{
          Statement st = conn.createStatement();
         ResultSet rs;
@@ -332,7 +425,51 @@ public class FXMLDocumentController implements Initializable {
              e.printStackTrace();
          }
      }
-
+     protected void loSkill(){
+         ArrayList<String> skillNames = new ArrayList<String>();
+         skillNames.add("Lockpicking");
+         skillNames.add("Hacking");
+         skillNames.add("Sneak");
+         skillNames.add("Speech");
+         skillNames.add("Science");
+         //createConnection();
+         try{
+         Statement st = conn.createStatement();
+        ResultSet rs;
+        st.setQueryTimeout(30);  // set timeout to 30 sec.
+        
+        rs = st.executeQuery("Select * from Skills");
+      
+         for(int i=0;i<skillNames.size();i++){
+           ObservableList<Item> data = fullSkillView.getItems();
+              data.add(new Item(skillNames.get(i),""));
+         }
+         }
+         catch(Exception e){
+             e.printStackTrace();
+         }
+     
+         
+     }
+     
+     protected void loadPerks(){
+          //createConnection();
+         try{
+         Statement st = conn.createStatement();
+        ResultSet rs;
+        st.setQueryTimeout(30);  // set timeout to 30 sec.
+        rs = st.executeQuery("Select * from Perks");
+        ObservableList<Item> data = fullPerkView.getItems();
+        while(rs.next()){
+            data.add(new Item(rs.getString(1), rs.getString(3)));
+         }
+         }
+         catch(Exception e){
+             e.printStackTrace();
+         }
+         
+         
+     }
     Connection conn = null;
     void createConnection(){
         try {
@@ -349,7 +486,10 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        createConnection();
         loadItems();
+        loSkill();
+        loadPerks();
         // TODO
     }    
 

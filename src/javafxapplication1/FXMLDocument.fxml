@@ -221,6 +221,68 @@
                   </AnchorPane>
                </content>
             </Tab>
+            <Tab text="Perk List">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="390.0" fitWidth="559.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../inv.jpg" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="fullPerkView" prefHeight="387.0" prefWidth="370.0">
+                           <columns>
+                              <TableColumn fx:id="fullItemName1" prefWidth="96.0" text="Name">
+                                 <cellValueFactory>
+                                    <PropertyValueFactory property="name" />
+                                 </cellValueFactory>
+                              </TableColumn>
+                              <TableColumn fx:id="fullItemDesc1" prefWidth="139.0" text="Desc">
+                                 <cellValueFactory>
+                                    <PropertyValueFactory property="desc" />
+                                 </cellValueFactory>
+                              </TableColumn>
+                           </columns>
+                           <items>
+                              <FXCollections fx:id="fullItemArray1" fx:factory="observableArrayList" />
+                           </items>
+                        </TableView>
+                        <Button layoutX="399.0" layoutY="33.0" mnemonicParsing="false" onAction="#addPerkFromFull" text="Add Selected Item" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Skill List">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="390.0" fitWidth="559.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../inv.jpg" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="fullSkillView" prefHeight="387.0" prefWidth="370.0">
+                           <columns>
+                              <TableColumn fx:id="fullItemName11" prefWidth="96.0" text="Name">
+                                 <cellValueFactory>
+                                    <PropertyValueFactory property="name" />
+                                 </cellValueFactory>
+                              </TableColumn>
+                              <TableColumn fx:id="fullItemDesc11" prefWidth="139.0" text="Desc">
+                                 <cellValueFactory>
+                                    <PropertyValueFactory property="desc" />
+                                 </cellValueFactory>
+                              </TableColumn>
+                           </columns>
+                           <items>
+                              <FXCollections fx:id="fullItemArray11" fx:factory="observableArrayList" />
+                           </items>
+                        </TableView>
+                        <Button layoutX="399.0" layoutY="33.0" mnemonicParsing="false" onAction="#addSkillFromFull" text="Add Selected Item" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
     </children>
