@@ -107,6 +107,8 @@ public class FXMLDocumentController implements Initializable {
             createString = "INSERT INTO Skills VALUES(10,10,10,10,10," + cha +");";
             st.executeUpdate(createString);
             
+            load(event);
+            
             //Skills(Lockpicking int, Hacking int, Sneak int, Speech int, Science int, charID INTEGER NOT NULL PRIMARY KEY references Character(charID)
 
             //System.out.println("ti's done");
