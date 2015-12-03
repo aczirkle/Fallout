@@ -50,11 +50,14 @@ public class FXMLDocumentController implements Initializable {
     private TextField lucInput;
     @FXML
     private TextField Name;
-
+    @FXML
+    private TextField lvlInput;
+    
     @FXML private TableView itemView;
     @FXML private TableView perkView;
     @FXML private TableView skillView;
     @FXML private TableView fullItemView;
+    
 
     
     //TODO: Add in some comments and tell us what these are in the GUI please
@@ -121,7 +124,56 @@ public class FXMLDocumentController implements Initializable {
         //called when the Save button is pushed
         //still called SaveCreate for convenience
         //TODO: implement the stuff that happens when the 
+        String levelS = lvlInput.getText();
+       
+        String strS = strInput.getText();
+        String perS = perInput.getText();
+        String endS = endInput.getText();
+        String chaS = chaInput.getText();
+        String agiS = agiInput.getText();
+        String intS = intInput.getText();
+        String lucS = lucInput.getText();
         
+       
+        
+        
+        /*UPDATE Perks
+          SET perkName = "Rad Regereration"
+          WHERE perkName = "Rad Regenerat";*/
+        
+        try {
+             String updateString = "UPDATE special SET strength = ?, perception = ?"
+                     + ", endurance = ?, charisma = ?, intelligence = ?, agility = ?, "
+                     + "luck = ? WHERE charID = ?";
+            PreparedStatement get = conn.prepareStatement(updateString);
+            get.setInt(1, Integer.parseInt(strS));
+            get.setInt(2, Integer.parseInt(perS));
+            get.setInt(3, Integer.parseInt(endS));
+            get.setInt(4, Integer.parseInt(chaS));
+            get.setInt(5, Integer.parseInt(intS));
+            get.setInt(6, Integer.parseInt(agiS));
+            get.setInt(7, Integer.parseInt(lucS));
+            
+            if(Name.getText().equals(""))
+             throw new RuntimeException("No charatcter loaded");
+            
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("Select charID from Character where cName = '"+Name.getText()+"'");
+            get.setInt(8, rs.getInt("charID"));
+            
+            get.executeUpdate();
+            
+            updateString = "UPDATE character SET level = ? WHERE charID = ?";
+            
+            get.setInt(1, Integer.parseInt(levelS));
+            get.setInt(2, rs.getInt("charID"));
+            
+            st.setQueryTimeout(30);
+            st.executeUpdate(updateString);
+        } catch(Exception e){
+           e.printStackTrace();
+           label.setText("Error");
+       }
     }
     
     @FXML
@@ -144,6 +196,9 @@ public class FXMLDocumentController implements Initializable {
         
         //cha is the string of the charID and can be used in all the SQL statements
         String cha = rs.getString("charID");
+        
+        rs = st.executeQuery("Select level from character where charID = '" + cha + "'");
+        lvlInput.setText(rs.getString("level"));
        
         rs = st.executeQuery("Select * from special where charID = '" + cha + "'");
         strInput.setText(Integer.toString(rs.getInt("strength")));
@@ -236,24 +291,24 @@ public class FXMLDocumentController implements Initializable {
      protected void loadItems(){
          createConnection();
          try{
-         Statement st = conn.createStatement();
-        ResultSet rs;
-        st.setQueryTimeout(30);  // set timeout to 30 sec.
-        rs = st.executeQuery("Select * from Weapons");
-        ObservableList<Item> data = fullItemView.getItems();
-        while(rs.next()){
-            data.add(new Item(rs.getString(2), rs.getString(3)+" Damage",""));
-         }
-        st = conn.createStatement();
-        rs=st.executeQuery("select * from Armor");
-        while( rs.next()){
-            data.add(new Item(rs.getString(2), rs.getString(3)+" Armor",""));
-         }
-        st = conn.createStatement();
-        rs=st.executeQuery("select * from Consumables");
-        while( rs.next()){
-            data.add(new Item(rs.getString(2),"", rs.getString(3)));
-         }
+            Statement st = conn.createStatement();
+            ResultSet rs;
+            st.setQueryTimeout(30);  // set timeout to 30 sec.
+            rs = st.executeQuery("Select * from Weapons");
+            ObservableList<Item> data = fullItemView.getItems();
+            while(rs.next()){
+                data.add(new Item(rs.getString(2), rs.getString(3)+" Damage",""));
+            }
+            st = conn.createStatement();
+            rs=st.executeQuery("select * from Armor");
+            while( rs.next()){
+                data.add(new Item(rs.getString(2), rs.getString(3)+" Armor",""));
+            }
+            st = conn.createStatement();
+            rs=st.executeQuery("select * from Consumables");
+            while( rs.next()){
+                data.add(new Item(rs.getString(2),"", rs.getString(3)));
+            }
          }
          catch(Exception e){
              e.printStackTrace();
