@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Andrew
+ * @author Andrew and Damon
  */
 public class FXMLDocumentController implements Initializable {
     
@@ -195,6 +195,14 @@ public class FXMLDocumentController implements Initializable {
          *the iID of each returned item then adds them to an ArrayList that is
          *returned. The returned ArrayList will then only consist of items of whatever
          *type that was being tested.*/
+        
+        
+        ArrayList<String> charArmor = getCharArmor(itemIDs);
+        ArrayList<String> charConsumes = getCharConsumes(itemIDs);
+        ArrayList<String> charWeps = getCharWeps(itemIDs);
+        //TODO: add get level stuff
+        
+        
         loadSkills(cha);
        }
        catch(Exception e){
@@ -305,5 +313,107 @@ public class FXMLDocumentController implements Initializable {
     private void displayCharPerks(ArrayList<String> perkNames, ArrayList<String> perkDescs) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         //TODO: this is where someone is supposed to take the lists I had from the query then put them in the correct tab.
+    }
+}
+
+private ArrayList<String> getCharWeps(ArrayList<String> itemIDs) {
+       for(String item: itemIDs) {
+        createConnection();
+        ResultSet rs;
+        try {
+            Statement st = conn.createStatement();
+            rs = st.executeQuery("SELECT iName, wStat FROM Weapons\n" +
+                    "WHERE iID = " + item + " ;");
+        
+            ArrayList<String> ans = new ArrayList<String>();
+            ArrayList<String> wStats = new ArrayList<String>();
+            
+            while(rs.next()) {
+                ans.add(rs.getString(1));
+                wStats.add(rs.getString(2));
+            }//while loop
+        
+            displayCharWeps(ans, wStats);
+            return ans;
+        
+        } catch(Exception e) {
+            //Yeah, I am expecting this to sometimes catch nothing so an exception would be thrown
+            //so do nothing
+        }
+    }
+        return null;
+    }
+
+    private ArrayList<String> getCharConsumes(ArrayList<String> itemIDs) {
+        for(String item: itemIDs) {
+        createConnection();
+        ResultSet rs;
+        try {
+            Statement st = conn.createStatement();
+            rs = st.executeQuery("SELECT iName, info FROM Consumables\n" +
+                    "WHERE iID = " + item + " ;");
+        
+            ArrayList<String> ans = new ArrayList<String>();
+            ArrayList<String> infos = new ArrayList<String>();
+            
+            while(rs.next()) {
+                ans.add(rs.getString(1));
+                infos.add(rs.getString(2));
+            }//while loop
+        
+            //other stuff goes here
+            displayCharConsumables(ans, infos);
+            return ans;
+        
+        } catch(Exception e) {
+            //Yeah, I am expecting this to sometimes catch nothing so an exception would be thrown
+            //so do nothing
+        }
+    }
+        return null;
+    }
+
+    private ArrayList<String> getCharArmor(ArrayList<String> itemIDs) {
+        for(String item: itemIDs) {
+        createConnection();
+        ResultSet rs;
+        try {
+            Statement st = conn.createStatement();
+            rs = st.executeQuery("SELECT iName, armorBonus FROM Armor\n" +
+                    "WHERE iID = " + item + " ;");
+        
+            ArrayList<String> ans = new ArrayList<String>();
+            ArrayList<String> bonuses = new ArrayList<String>();
+            
+            while(rs.next()) {
+                ans.add(rs.getString(1));
+                bonuses.add(rs.getString(2));
+            }//while loop
+        
+            //other stuff goes here
+            displayCharArmor(ans, bonuses);
+            return ans;
+        
+        } catch(Exception e) {
+            //Yeah, I am expecting this to sometimes catch nothing so an exception would be thrown
+            //so do nothing
+        }
+    }
+        return null;
+    }
+
+    private void displayCharArmor(ArrayList<String> itemNames, ArrayList<String> wStats) {
+		//TODO: put the character armor in the GUI
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void displayCharConsumables(ArrayList<String> itemNames, ArrayList<String> infos) {
+        //TODO: put the character consumables in the GUI
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void displayCharWeps(ArrayList<String> itemNames, ArrayList<String> wStats) {
+        //TODO: put the character Weapons in the GUI
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
