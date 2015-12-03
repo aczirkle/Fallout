@@ -96,14 +96,14 @@
                               <Image url="@../../inv.jpg" />
                            </image>
                         </ImageView>
-                        <TableView fx:id="itemView" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
+                        <TableView fx:id="itemView" layoutY="-1.0" prefHeight="388.0" prefWidth="341.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Item Name">
+                            <TableColumn prefWidth="119.0" text="Item Name">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="name" />
                                 </cellValueFactory>
                             </TableColumn>
-                            <TableColumn prefWidth="75.0" text="Quanity">
+                            <TableColumn prefWidth="96.0" text="Quanity">
                              <cellValueFactory>
                                     <PropertyValueFactory property="desc" />
                              </cellValueFactory>
@@ -115,6 +115,7 @@
                                 </FXCollections>
                             </items>
                         </TableView>
+                        <Button layoutX="395.0" layoutY="63.0" mnemonicParsing="false" onAction="#removeItem" text="Delete Item" />
                      </children>
                   </AnchorPane>
             </content>
@@ -279,6 +280,7 @@
                            </items>
                         </TableView>
                         <Button layoutX="399.0" layoutY="33.0" mnemonicParsing="false" onAction="#addSkillFromFull" text="Add Selected Item" />
+                        <Button layoutX="399.0" layoutY="104.0" mnemonicParsing="false" onAction="#deleteSkillFromFull" text="Subtract Selected Item" />
                      </children>
                   </AnchorPane>
                </content>

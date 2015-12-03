@@ -121,7 +121,6 @@ public class FXMLDocumentController implements Initializable {
        
     }
     
-    
     @FXML
     private void Save(ActionEvent event) {
         //called when the Save button is pushed
@@ -413,7 +412,8 @@ public class FXMLDocumentController implements Initializable {
          
          
      }
-     @FXML
+     
+          @FXML
      protected void addSkillFromFull(ActionEvent event){
          if(Name.getText().equals(""))
              throw new RuntimeException("No charatcter loaded");
@@ -438,6 +438,91 @@ public class FXMLDocumentController implements Initializable {
          rs = st.executeQuery("Select "+name+" from Skills where charID = '"+cha+"'");
          int skill = rs.getInt(1);
          skill++;
+
+       String str = "UPDATE Skills SET "+name+" = ? where charID = ?";
+        PreparedStatement get = conn.prepareStatement(str);
+        get.setInt(1,skill);
+        get.setInt(2,Integer.parseInt(cha));
+        get.executeUpdate();
+        
+        System.out.println("I Updated the db");
+        load(event);
+        System.out.println("I did Everything");
+
+         }
+         catch (Exception e){
+             e.printStackTrace();
+             
+         }
+         
+         
+     }
+     @FXML
+     protected void removeItem(ActionEvent event){
+         if(Name.getText().equals(""))
+             throw new RuntimeException("No charatcter loaded");
+             
+        // createConnection();
+         try{
+             Item it = (Item) itemView.getSelectionModel().getSelectedItem();
+             String name = (it.getName());
+             if(name.equals(""))
+                 throw new RuntimeException("No Item Selected");
+             
+         Statement st = conn.createStatement();
+         ResultSet rs;
+         st.setQueryTimeout(30);  // set timeout to 30 sec.
+         
+         rs = st.executeQuery("Select iID from Items where iName = '"+name+"'");
+         st = conn.createStatement();
+         String pk = rs.getString(1);
+         
+         rs = st.executeQuery("Select charID from Character where cName = '"+Name.getText()+"'");
+         
+         String cha = rs.getString(1);
+         if(cha.equals(""))
+             throw new RuntimeException("No character by that name");
+        st = conn.createStatement();
+         st.executeUpdate("Delete from HasItems where charID = '"+cha+"' AND iID = '"+pk+"'");
+        
+        System.out.println("I Updated the db");
+        load(event);
+        System.out.println("I did Everything");
+
+         }
+         catch (Exception e){
+             e.printStackTrace();
+             
+         }
+         
+         
+     }
+     
+     @FXML
+     protected void deleteSkillFromFull(ActionEvent event){
+         if(Name.getText().equals(""))
+             throw new RuntimeException("No charatcter loaded");
+             
+        // createConnection();
+         try{
+             Item it = (Item) fullSkillView.getSelectionModel().getSelectedItem();
+             String name = (it.getName());
+             if(name.equals(""))
+                 throw new RuntimeException("No Item Selected");
+             
+         Statement st = conn.createStatement();
+         ResultSet rs;
+         st.setQueryTimeout(30);  // set timeout to 30 sec.
+         
+         rs = st.executeQuery("Select charID from Character where cName = '"+Name.getText()+"'");
+         st = conn.createStatement();
+         String cha = rs.getString(1);
+         if(cha.equals(""))
+             throw new RuntimeException("No character by that name");
+        
+         rs = st.executeQuery("Select "+name+" from Skills where charID = '"+cha+"'");
+         int skill = rs.getInt(1);
+         skill--;
 
        String str = "UPDATE Skills SET "+name+" = ? where charID = ?";
         PreparedStatement get = conn.prepareStatement(str);
