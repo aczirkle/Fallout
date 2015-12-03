@@ -192,7 +192,7 @@
                               <Image url="@../../inv.jpg" />
                            </image>
                         </ImageView>
-                        <TableView fx:id="fullItemView" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
+                        <TableView fx:id="fullItemView" prefHeight="387.0" prefWidth="370.0">
                            <columns>
                               <TableColumn fx:id="fullItemName" prefWidth="96.0" text="Name">
                                   <cellValueFactory>
@@ -216,6 +216,7 @@
                                 </FXCollections>
                            </items>
                         </TableView>
+                        <Button layoutX="399.0" layoutY="33.0" mnemonicParsing="false" onAction="#addItemFromFull" text="Add Selected Item" />
                      </children>
                   </AnchorPane>
                </content>

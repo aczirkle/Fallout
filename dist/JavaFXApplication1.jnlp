@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="JavaFXApplication1.jar" size="11682463" download="eager" />
+    <jar href="JavaFXApplication1.jar" size="11683199" download="eager" />
     <jar href="lib\sqlite-jdbc-3.8.11.2.jar" size="5575351" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="JavaFXApplication1" >

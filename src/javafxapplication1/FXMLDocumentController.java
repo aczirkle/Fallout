@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -125,6 +126,12 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void load(ActionEvent event) {
+        ObservableList<Item> data = perkView.getItems();
+        data.clear();
+        data = itemView.getItems();
+        data.clear();
+        data = skillView.getItems();
+        data.clear();
         //System.out.println("You clicked me!");
        // label.setText("Hello World!");
     try{
@@ -252,8 +259,50 @@ public class FXMLDocumentController implements Initializable {
              e.printStackTrace();
          }
      }
-      
-     
+      @FXML
+     protected void addItemFromFull(ActionEvent event){
+         if(Name.getText().equals(""))
+             throw new RuntimeException("No charatcter loaded");
+             
+         createConnection();
+         try{
+             Item it = (Item) fullItemView.getSelectionModel().getSelectedItem();
+             String name = (it.getName());
+             if(name.equals(""))
+                 throw new RuntimeException("No Item Selected");
+             
+         Statement st = conn.createStatement();
+         ResultSet rs;
+         st.setQueryTimeout(30);  // set timeout to 30 sec.
+         
+         rs = st.executeQuery("Select iID from Items where iName = '"+name+"'");
+         st = conn.createStatement();
+         String pk = rs.getString(1);
+        
+         rs = st.executeQuery("Select charID from Character where cName = '"+Name.getText()+"'");
+         st = conn.createStatement();
+         String cha = rs.getString(1);
+         if(cha.equals(""))
+             throw new RuntimeException("No character by that name");
+          System.out.println("I got the data: "+pk+" ,"+cha);
+       String str = "INSERT INTO HasItems VALUES(?, ?, ?)";
+        PreparedStatement get = conn.prepareStatement(str);
+        get.setInt(1,Integer.parseInt(pk));
+        get.setInt(2,1);
+        get.setInt(3,Integer.parseInt(cha));
+        get.executeUpdate();
+        System.out.println("I Updated the db");
+        load(event);
+        System.out.println("I did Everything");
+
+         }
+         catch (Exception e){
+             e.printStackTrace();
+             
+         }
+         
+         
+     }
      
      protected void loadSkills(String charID){
          ArrayList<String> skillNames = new ArrayList<String>();
@@ -268,8 +317,6 @@ public class FXMLDocumentController implements Initializable {
         ResultSet rs;
         st.setQueryTimeout(30);  // set timeout to 30 sec.
         
-        //Lockpicking int NOT NULL, Hacking int NOT NULL, Sneak int NOT NULL, Speech int NOT NULL, Science int NOT NULL, charID INTEGER NOT NULL PRIMARY KEY references Character(charID) ON DELETE CASCADE);
-
         rs = st.executeQuery("Select * from Skills where charID = '"+charID+"'");
       /*  while(rs.next()){
             ObservableList<Skill> data = fullItemView.getItems();
@@ -306,8 +353,4 @@ public class FXMLDocumentController implements Initializable {
         // TODO
     }    
 
-    private void displayCharPerks(ArrayList<String> perkNames, ArrayList<String> perkDescs) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //TODO: this is where someone is supposed to take the lists I had from the query then put them in the correct tab.
-    }
 }
