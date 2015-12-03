@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.text.*?>
-<?import javafx.collections.*?> 
+<?import javafx.collections.*?>
 <?import javafx.geometry.Insets?>
 <?import javafxapplication1.*?>
 <?import javafx.scene.image.*?>
@@ -9,7 +9,7 @@
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.*?> 
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="399.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication1.FXMLDocumentController">
@@ -98,19 +98,19 @@
                         </ImageView>
                         <TableView fx:id="itemView" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
                           <columns>
-                            <TableColumn  prefWidth="75.0" text="Item Name" >
+                            <TableColumn prefWidth="75.0" text="Item Name">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="name" />
                                 </cellValueFactory>
                             </TableColumn>
-                            <TableColumn prefWidth="75.0" text="Quanity" >
+                            <TableColumn prefWidth="75.0" text="Quanity">
                              <cellValueFactory>
                                     <PropertyValueFactory property="desc" />
                              </cellValueFactory>
                            </TableColumn>
                           </columns>
                           <items>
-                                <FXCollections fx:factory="observableArrayList" fx:id="itemArray">
+                                <FXCollections fx:id="itemArray" fx:factory="observableArrayList">
                                   
                                 </FXCollections>
                             </items>
@@ -130,19 +130,19 @@
                         </ImageView>
                         <TableView fx:id="perkView" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
                            <columns>
-                              <TableColumn fx:id="perkName" prefWidth="75.0" text="Perk Name" >
+                              <TableColumn fx:id="perkName" prefWidth="75.0" text="Perk Name">
                               <cellValueFactory>
                                     <PropertyValueFactory property="name" />
                               </cellValueFactory>
                               </TableColumn>
-                              <TableColumn fx:id="perkDesc" prefWidth="228.0" text="Desc" >
+                              <TableColumn fx:id="perkDesc" prefWidth="228.0" text="Desc">
                                   <cellValueFactory>
                                     <PropertyValueFactory property="desc" />
                                   </cellValueFactory>
                               </TableColumn>
                            </columns>
                            <items>
-                               <FXCollections fx:factory="observableArrayList" fx:id="perkArray">
+                               <FXCollections fx:id="perkArray" fx:factory="observableArrayList">
                                   
                                 </FXCollections>
                            </items>
@@ -162,19 +162,19 @@
                         </ImageView>
                         <TableView fx:id="skillView" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
                            <columns>
-                              <TableColumn fx:id="skillName" prefWidth="75.0" text="Skill Name" >
+                              <TableColumn fx:id="skillName" prefWidth="75.0" text="Skill Name">
                                   <cellValueFactory>
                                     <PropertyValueFactory property="name" />
                                   </cellValueFactory>
                               </TableColumn>
-                              <TableColumn fx:id="skillDesc" prefWidth="228.0" text="Desc" >
+                              <TableColumn fx:id="skillDesc" prefWidth="228.0" text="Desc">
                                   <cellValueFactory>
                                     <PropertyValueFactory property="desc" />
                                   </cellValueFactory>
                               </TableColumn>
                            </columns>
                            <items>
-                               <FXCollections fx:factory="observableArrayList" fx:id="skillArray">
+                               <FXCollections fx:id="skillArray" fx:factory="observableArrayList">
                                   
                                 </FXCollections>
                            </items>
@@ -194,19 +194,24 @@
                         </ImageView>
                         <TableView fx:id="fullItemView" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
                            <columns>
-                              <TableColumn fx:id="fullItemName" prefWidth="75.0" text="Item" >
+                              <TableColumn fx:id="fullItemName" prefWidth="96.0" text="Name">
                                   <cellValueFactory>
                                     <PropertyValueFactory property="name" />
                                   </cellValueFactory>
                               </TableColumn>
-                              <TableColumn fx:id="fullItemDesc" prefWidth="228.0" text="Desc" >
+                              <TableColumn fx:id="fullItemDesc" prefWidth="139.0" text="Desc">
                                   <cellValueFactory>
                                     <PropertyValueFactory property="desc" />
                                   </cellValueFactory>
                               </TableColumn>
+                              <TableColumn fx:id="fullItemNum" prefWidth="128.0" text="Attribute Number">
+                                  <cellValueFactory>
+                                    <PropertyValueFactory property="num" />
+                                  </cellValueFactory>
+                              </TableColumn>
                            </columns>
                            <items>
-                               <FXCollections fx:factory="observableArrayList" fx:id="fullItemArray">
+                               <FXCollections fx:id="fullItemArray" fx:factory="observableArrayList">
                                   
                                 </FXCollections>
                            </items>

@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 public class Item {
    private final SimpleStringProperty name = new SimpleStringProperty("");
    private final SimpleStringProperty desc = new SimpleStringProperty("");
+   private final SimpleStringProperty num = new SimpleStringProperty("");
 
 public Item() {
         this("", "");
@@ -20,6 +21,13 @@ public Item() {
         setDesc(desc);
         //setEmail(email);
     }
+    
+    public Item(String name, String num,String desc) {
+        setName(name);
+        setDesc(desc);
+        setNum(num);
+        //setEmail(email);
+    }
 
     public String getName() {
         return name.get();
@@ -27,6 +35,13 @@ public Item() {
  
     public void setName(String fName) {
         name.set(fName);
+    }
+    public String getNum() {
+        return num.get();
+    }
+ 
+    public void setNum(String fName) {
+        num.set(fName);
     }
         
     public String getDesc() {

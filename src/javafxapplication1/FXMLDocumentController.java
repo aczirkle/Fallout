@@ -49,19 +49,12 @@ public class FXMLDocumentController implements Initializable {
     private TextField lucInput;
     @FXML
     private TextField Name;
- //   @FXML private TableColumn perkName;
-   // @FXML private TableColumn perkDesc;
- //   @FXML private TableColumn itemName;
-  //  @FXML private TableColumn Quanity;
+
     @FXML private TableView itemView;
     @FXML private TableView perkView;
     @FXML private TableView skillView;
     @FXML private TableView fullItemView;
- //   @FXML private TableColumn skillName;
- //   @FXML private TableColumn skillDesc;
-	
- //   @FXML private TableColumn itemNameFull;
-  //  @FXML private TableColumn itemDescFull;
+
     
     //TODO: Add in some comments and tell us what these are in the GUI please
     /*Other thongs to do for the rest of us to do what we need to do:
@@ -239,11 +232,21 @@ public class FXMLDocumentController implements Initializable {
          Statement st = conn.createStatement();
         ResultSet rs;
         st.setQueryTimeout(30);  // set timeout to 30 sec.
-        rs = st.executeQuery("Select iID,iName from Items");
+        rs = st.executeQuery("Select * from Weapons");
+        ObservableList<Item> data = fullItemView.getItems();
         while(rs.next()){
-            ObservableList<Item> data = fullItemView.getItems();
-            data.add(new Item(rs.getString(1), rs.getString(2)));
-         }   
+            data.add(new Item(rs.getString(2), rs.getString(3)+" Damage",""));
+         }
+        st = conn.createStatement();
+        rs=st.executeQuery("select * from Armor");
+        while( rs.next()){
+            data.add(new Item(rs.getString(2), rs.getString(3)+" Armor",""));
+         }
+        st = conn.createStatement();
+        rs=st.executeQuery("select * from Consumables");
+        while( rs.next()){
+            data.add(new Item(rs.getString(2),"", rs.getString(3)));
+         }
          }
          catch(Exception e){
              e.printStackTrace();
@@ -299,6 +302,7 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        loadItems();
         // TODO
     }    
 

@@ -194,14 +194,19 @@
                         </ImageView>
                         <TableView fx:id="fullItemView" layoutY="1.0" prefHeight="386.0" prefWidth="559.0">
                            <columns>
-                              <TableColumn fx:id="fullItemName" prefWidth="75.0" text="Item" >
+                              <TableColumn fx:id="fullItemName" prefWidth="85.0" text="Name" >
                                   <cellValueFactory>
                                     <PropertyValueFactory property="name" />
                                   </cellValueFactory>
                               </TableColumn>
-                              <TableColumn fx:id="fullItemDesc" prefWidth="228.0" text="Desc" >
+                              <TableColumn fx:id="fullItemDesc" prefWidth="150.0" text="Desc" >
                                   <cellValueFactory>
                                     <PropertyValueFactory property="desc" />
+                                  </cellValueFactory>
+                              </TableColumn>
+                              <TableColumn fx:id="fullItemNum" prefWidth="85.0" text="Attribute Number" >
+                                  <cellValueFactory>
+                                    <PropertyValueFactory property="num" />
                                   </cellValueFactory>
                               </TableColumn>
                            </columns>
