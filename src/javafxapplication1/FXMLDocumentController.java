@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Andrew
+ * @author Andrew and Damon
  */
 public class FXMLDocumentController implements Initializable {
     
