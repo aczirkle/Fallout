@@ -162,14 +162,21 @@ public class FXMLDocumentController implements Initializable {
             
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("Select charID from Character where cName = '"+Name.getText()+"'");
-            get.setInt(8, rs.getInt("charID"));
+            
+            int charIDS = rs.getInt("charID");
+            get.setInt(8, charIDS);
+            
             
             get.executeUpdate();
             
             updateString = "UPDATE character SET level = ? WHERE charID = ?";
             
+            get = conn.prepareStatement(updateString);
+            
             get.setInt(1, Integer.parseInt(levelS));
-            get.setInt(2, rs.getInt("charID"));
+            get.setInt(2, charIDS);
+            
+            get.executeUpdate();
             
             st.setQueryTimeout(30);
             st.executeUpdate(updateString);
