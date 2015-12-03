@@ -209,7 +209,7 @@ public class FXMLDocumentController implements Initializable {
            e.printStackTrace();
            label.setText("Error");
        }
-    }
+    }// end load function
     
     @FXML
     private void randomChar(ActionEvent event) {
@@ -244,14 +244,14 @@ public class FXMLDocumentController implements Initializable {
      protected void loadItems(){
          createConnection();
          try{
-         Statement st = conn.createStatement();
-        ResultSet rs;
-        st.setQueryTimeout(30);  // set timeout to 30 sec.
-        rs = st.executeQuery("Select iID,iName from Items");
-        while(rs.next()){
-            ObservableList<Item> data = fullItemView.getItems();
-            data.add(new Item(rs.getString(1), rs.getString(2)));
-         }   
+            Statement st = conn.createStatement();
+            ResultSet rs;
+            st.setQueryTimeout(30);  // set timeout to 30 sec.
+            rs = st.executeQuery("Select iID,iName from Items");
+            while(rs.next()){
+                ObservableList<Item> data = fullItemView.getItems();
+                data.add(new Item(rs.getString(1), rs.getString(2)));
+            }   
          }
          catch(Exception e){
              e.printStackTrace();
@@ -268,23 +268,23 @@ public class FXMLDocumentController implements Initializable {
          skillNames.add("Speech");
          skillNames.add("Science");
          createConnection();
+         
          try{
-         Statement st = conn.createStatement();
-        ResultSet rs;
-        st.setQueryTimeout(30);  // set timeout to 30 sec.
+            Statement st = conn.createStatement();
+            ResultSet rs;
+            st.setQueryTimeout(30);  // set timeout to 30 sec.
         
-        //Lockpicking int NOT NULL, Hacking int NOT NULL, Sneak int NOT NULL, Speech int NOT NULL, Science int NOT NULL, charID INTEGER NOT NULL PRIMARY KEY references Character(charID) ON DELETE CASCADE);
 
-        rs = st.executeQuery("Select * from Skills where charID = '"+charID+"'");
-      /*  while(rs.next()){
-            ObservableList<Skill> data = fullItemView.getItems();
-            data.add(new Skill(rs.getString(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)));
-         }   */
+            rs = st.executeQuery("Select * from Skills where charID = '"+charID+"'");
+            /*  while(rs.next()){
+                ObservableList<Skill> data = fullItemView.getItems();
+                data.add(new Skill(rs.getString(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)));
+            }   */
       
-         for(int i=0;i<skillNames.size();i++){
-           ObservableList<Item> data = skillView.getItems();
-              data.add(new Item(skillNames.get(i),rs.getString(i+1)));
-         }
+            for(int i=0;i<skillNames.size();i++){
+                ObservableList<Item> data = skillView.getItems();
+                data.add(new Item(skillNames.get(i),rs.getString(i+1)));
+            }
          }
          catch(Exception e){
              e.printStackTrace();
@@ -314,7 +314,6 @@ public class FXMLDocumentController implements Initializable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         //TODO: this is where someone is supposed to take the lists I had from the query then put them in the correct tab.
     }
-}
 
 private ArrayList<String> getCharWeps(ArrayList<String> itemIDs) {
        for(String item: itemIDs) {
